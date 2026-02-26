@@ -22,8 +22,8 @@ from pydantic_ai_litellm import LiteLLMModel
 load_dotenv()
 litellm.suppress_debug_info = True
 
-if "GEMINI_API_KEY" not in os.environ and os.environ.get("GOOGLE_API_KEY"):
-    os.environ["GEMINI_API_KEY"] = os.environ["GOOGLE_API_KEY"]
+if "PERPLEXITY_API_KEY" not in os.environ:
+    raise SystemExit("Set PERPLEXITY_API_KEY before running this script.")
 
 use_patch = "--patch" in sys.argv
 if use_patch:
@@ -102,7 +102,7 @@ def make_png_with_text() -> bytes:
 
 
 async def main():
-    model_name = os.getenv("FLASH_MODEL", "openrouter/google/gemini-2.5-flash")
+    model_name = os.getenv("FLASH_MODEL", "perplexity/sonar")
     model = LiteLLMModel(model_name=model_name)
     agent = Agent(
         model,
