@@ -5,8 +5,8 @@ import pytest
 
 # Name extraction tests require LLM API and use async
 requires_api = pytest.mark.skipif(
-    not os.getenv("GOOGLE_API_KEY"),
-    reason="GOOGLE_API_KEY not set"
+    not os.getenv("PERPLEXITY_API_KEY"),
+    reason="PERPLEXITY_API_KEY not set"
 )
 
 

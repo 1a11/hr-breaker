@@ -39,14 +39,14 @@ logger = setup_logging()
 class Settings(BaseSettings):
     """Application settings. Reads from env vars (uppercased field names)."""
 
-    # API key (accepts GOOGLE_API_KEY as fallback for backward compat)
-    gemini_api_key: str | None = Field(
+    # API key for Perplexity
+    perplexity_api_key: str | None = Field(
         default=None,
-        validation_alias=AliasChoices("GEMINI_API_KEY", "GOOGLE_API_KEY"),
+        validation_alias=AliasChoices("PERPLEXITY_API_KEY"),
     )
 
-    pro_model: str = "gemini/gemini-3-pro-preview"
-    flash_model: str = "gemini/gemini-3-flash-preview"
+    pro_model: str = "perplexity/sonar-pro"
+    flash_model: str = "perplexity/sonar"
     reasoning_effort: str = "medium"
     cache_dir: Path = Path(".cache/resumes")
     output_dir: Path = Path("output")
@@ -83,7 +83,7 @@ class Settings(BaseSettings):
     keyword_max_missing_display: int = 10
 
     # Embedding settings
-    embedding_model: str = "gemini/text-embedding-004"
+    embedding_model: str = ""
     embedding_output_dimensionality: int = 768
 
     # Agent limits
@@ -98,8 +98,8 @@ class Settings(BaseSettings):
     retry_max_wait: float = 60.0
 
     def model_post_init(self, __context: Any) -> None:
-        if self.gemini_api_key and "GEMINI_API_KEY" not in os.environ:
-            os.environ["GEMINI_API_KEY"] = self.gemini_api_key
+        if self.perplexity_api_key and "PERPLEXITY_API_KEY" not in os.environ:
+            os.environ["PERPLEXITY_API_KEY"] = self.perplexity_api_key
 
 
 @lru_cache

@@ -19,7 +19,7 @@ Tool for optimizing resumes for job postings and passing automated filters.
 
 1. Streamlit frontend
 2. Pydantic-AI LLM agent framework + pydantic-ai-litellm (any LLM provider)
-3. Default: Google Gemini models (configurable to OpenAI, Anthropic, etc. via litellm)
+3. Default: Perplexity models (configurable to OpenAI, Anthropic, etc. via litellm)
 4. Modular filter system - easy to add new checks
 5. Resume caching - input once, apply to many jobs
 
@@ -37,8 +37,8 @@ LiteLLM docs: https://docs.litellm.ai/docs/
 When debugging use 1-2 iterations only (costs money). Use these settings:
 ```
 REASONING_EFFORT=low
-PRO_MODEL=gemini/gemini-2.5-flash
-FLASH_MODEL=gemini/gemini-2.5-flash
+PRO_MODEL=perplexity/sonar
+FLASH_MODEL=perplexity/sonar
 ```
 
 ## Current Implementation
@@ -133,11 +133,11 @@ Repro: `uv run python scripts/repro_vision_bug.py` (without patch) vs `uv run py
 `Settings` uses `pydantic-settings` `BaseSettings` — env vars are auto-mapped from uppercased field names. All settings in `config.py` are configurable via env vars. See `.env.example` for the full list.
 
 Key model config vars (litellm format):
-- `PRO_MODEL` - Pro model (default: `gemini/gemini-3-pro-preview`)
-- `FLASH_MODEL` - Flash model (default: `gemini/gemini-3-flash-preview`)
-- `EMBEDDING_MODEL` - Embedding model (default: `gemini/text-embedding-004`)
+- `PRO_MODEL` - Pro model (default: `perplexity/sonar-pro`)
+- `FLASH_MODEL` - Flash model (default: `perplexity/sonar`)
+- `EMBEDDING_MODEL` - Embedding model (Perplexity does not provide embeddings; configure another provider, e.g. `openai/text-embedding-3-small`)
 - `REASONING_EFFORT` - none/low/medium/high (default: `medium`)
-- `GEMINI_API_KEY` - API key for Gemini (also accepts `GOOGLE_API_KEY` for backward compat)
+- `PERPLEXITY_API_KEY` - API key for Perplexity
 - `RETRY_MAX_ATTEMPTS` - Max retry attempts for rate limits (default: `5`)
 - `RETRY_MAX_WAIT` - Max backoff wait in seconds (default: `60`)
 

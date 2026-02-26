@@ -41,8 +41,8 @@ def test_is_retryable_unrelated_exception():
 def test_is_retryable_litellm_rate_limit():
     exc = RateLimitError(
         message="rate limited",
-        llm_provider="gemini",
-        model="gemini/gemini-3-flash",
+        llm_provider="perplexity",
+        model="perplexity/sonar",
     )
     assert is_retryable(exc) is True
 
@@ -77,8 +77,8 @@ async def test_run_with_retry_exhausts_attempts():
 async def test_run_with_retry_retries_litellm_rate_limit():
     exc = RateLimitError(
         message="rate limited",
-        llm_provider="gemini",
-        model="gemini/gemini-3-flash",
+        llm_provider="perplexity",
+        model="perplexity/sonar",
     )
     func = AsyncMock(side_effect=[exc, "ok"])
     result = await run_with_retry(func, "arg1")

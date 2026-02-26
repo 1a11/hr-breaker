@@ -36,7 +36,7 @@ uv sync
 
 # Configure
 cp .env.example .env
-# Edit .env and add your GOOGLE_API_KEY
+# Edit .env and add your PERPLEXITY_API_KEY
 
 # Run web UI
 uv run streamlit run src/hr_breaker/main.py
@@ -86,7 +86,7 @@ uv run hr-breaker list
 
 ## Configuration
 
-Copy `.env.example` to `.env` and set `GOOGLE_API_KEY` (required). See `.env.example` for all available options.
+Copy `.env.example` to `.env` and set `PERPLEXITY_API_KEY` (required). See `.env.example` for all available options.
 
 ---
 
